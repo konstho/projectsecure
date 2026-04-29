@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}Admin Dashboard{% endblock %}
+{% block content %}
+
+<h1>Admin Dashboard</h1>
+<div class="admin-box">
+    <b>Welcome, {{ session.user }}.</b> Internal use only. Do not share this data.
+</div>
+
+<h3>Overview</h3>
+<ul>
+    <li>Total users: <b>{{ user_count }}</b></li>
+    <li>Total orders: <b>{{ orders|length }}</b></li>
+    <li>Total revenue: <b>€{{ "%.2f"|format(revenue) }}</b></li>
+</ul>
+
+<h3>All customer orders</h3>
+<table>
+    <tr>
+        <th>#</th>
+        <th>Customer</th>
+        <th>Email</th>
+        <th>Product</th>
+        <th>Total</th>
+        <th>Address</th>
+    </tr>
+    {% for o in orders %}
+    <tr>
+        <td>{{ o['id'] }}</td>
+        <td>{{ o['customer_name'] }}</td>
+        <td>{{ o['email'] }}</td>
+        <td>{{ o['product'] }}</td>
+        <td>€{{ "%.2f"|format(o['total']) }}</td>
+        <td>{{ o['address'] }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

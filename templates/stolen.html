@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Attacker's log{% endblock %}
+{% block content %}
+
+
+{% if entries %}
+    <ul>
+    {% for e in entries %}
+        <li><code style="word-break:break-all;">{{ e }}</code></li>
+    {% endfor %}
+    </ul>
+{% else %}
+{% endif %}
+
+{% endblock %}

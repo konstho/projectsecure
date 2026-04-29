@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Order #{{ order['id'] }}{% endblock %}
+{% block content %}
+
+<h1>Order #{{ order['id'] }}</h1>
+
+<h3>Order details</h3>
+<p><b>Product:</b> {{ order['product'] }}</p>
+<p><b>Total:</b> €{{ "%.2f"|format(order['total']) }}</p>
+
+{# VULNERABILITY 3: IDOR - anyone logged in can read this PII #}
+<h3>Shipping information</h3>
+<p><b>Customer:</b> {{ order['customer_name'] }}</p>
+<p><b>Email:</b> {{ order['email'] }}</p>
+<p><b>Phone:</b> {{ order['phone'] }}</p>
+<p><b>Address:</b> {{ order['address'] }}</p>
+
+<h3>Payment</h3>
+<p><b>Card:</b> **** **** **** {{ order['card_last4'] }}</p>
+
+<p><a href="{{ url_for('orders') }}">&larr; Back to my orders</a></p>
+
+{% endblock %}

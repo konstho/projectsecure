@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Shop - Home{% endblock %}
+{% block content %}
+
+<h1>Welcome to the Shop</h1>
+<p>Browse our products below:</p>
+
+<table>
+    <tr><th>Name</th><th>Description</th><th>Price</th><th></th></tr>
+    {% for p in products %}
+    <tr>
+        <td>{{ p['name'] }}</td>
+        <td>{{ p['description'] }}</td>
+        <td>€{{ "%.2f"|format(p['price']) }}</td>
+        <td><a href="{{ url_for('product', pid=p['id']) }}">View</a></td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}
