@@ -1,11 +1,20 @@
-## Applied Web Application Security Course Project
+# Applied Web Application Security Course Project
 
-I created a small interactive shop web site using flask and it runs locally form my pycharm. It has three vulnerabilities.
+A small intentionally vulnerable shop web application built with Flask for educational purposes. The project demonstrates common web application security flaws in a practical environment.
 
-1. SQL Injeciton: Using this command in the search bar:' UNION SELECT id, usernames, password FROM 0 users--
-This will list out all the usernames and passwords
+## Vulnerabilities Included
 
-2. Stored-XSS and session hijack: In the web site you can leave a review for a product. Logged in as a user you can leave a review to one of the products and you can leave this script: <script>new Image().src='/steal?c='+document.cookie</script>
-This will run silently for anyone who will access the review page. It will steal their cookie session and send it to the hackers endpoint, /stolen. Hacker can then use this session cookie to login e.g. as admin.
+**SQL Injection**
+Search functionality is vulnerable to SQL injection, allowing extraction of usernames and passwords from the database.
 
-3. IDOR: You can view ur personal orders that will also reveal address, phone number etc. with IDOR you can then just change the url and view others orders and see their personal information.
+**Stored XSS / Session Hijacking**
+Product reviews allow stored JavaScript payloads that can steal user session cookies and enable account hijacking.
+
+**IDOR**
+Order pages are vulnerable to insecure direct object references, allowing users to access other users’ order information by modifying the URL.
+
+## Tech Stack
+
+Python, Flask, SQLite, HTML/CSS, JavaScript
+
+**Note:** This application is intentionally vulnerable and created strictly for educational purposes.
